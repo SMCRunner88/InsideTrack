@@ -23,18 +23,18 @@ $cmo_wide_boxed = cmo_get_page_theme_option( 'content_layout', 'content-layout' 
 
 <?php
 	add_action( 'wp_enqueue_scripts', 'cmo_theme_css' );
-	add_action( 'wp_head', 'cmo_theme_dynamic_css' ); 
+	add_action( 'wp_head', 'cmo_theme_dynamic_css' );
 ?>
 <?php wp_head(); ?>
 </head>
 <body
-	<?php body_class( array( 
+	<?php body_class( array(
 			( cmo_get_theme_mod_value( "content-preloader") == "enable" ) ? "loading" : "",
 			$cmo_wide_boxed,
 			$cmo_is_responsive_enabled ? "responsive" : "",
 		) );  ?>>
 
-	<?php if ( cmo_get_theme_mod_value( "content-preloader") == "enable" ): ?>	
+	<?php if ( cmo_get_theme_mod_value( "content-preloader") == "enable" ): ?>
 	<div class="cmo-loader-wrapper">
 		<div class="cmo-loader">
 			<div class="loader-inner"></div>
@@ -47,29 +47,29 @@ $cmo_wide_boxed = cmo_get_page_theme_option( 'content_layout', 'content-layout' 
 	<?php } ?>
 <?php
 	if ( cmo_is_yes_or_one( cmo_get_page_theme_option( 'header_show_header', 'header-show-header' ) ) ) {
-		$cmo_header_style = cmo_get_page_theme_option( 'header_style', 'header-style' ); 
+		$cmo_header_style = cmo_get_page_theme_option( 'header_style', 'header-style' );
 ?>
 <?php if ( $cmo_is_responsive_enabled && has_nav_menu('main-menu') ) { ?>
 	<div id="mobile-menu-container">
 		<button type="button" id="toggle-mobile-menu" class="toggle-button" data-target="main-menu-wrapper">
-			<span class="sr-only">Toggle navigation</span> 
+			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
 		<div class="mobile-menu-triangle"></div>
-	<?php 
+	<?php
 	$cmo_pmenu = cmo_get_page_theme_option( 'header_menu', null );
 	if ( $cmo_pmenu !== "secondary-menu" ) {
 		$cmo_pmenu = "main-menu";
 	}
 
 	add_filter('wp_nav_menu_items','cmo_add_search_box_to_mobile_nav');
-	wp_nav_menu( 
-		array( 
+	wp_nav_menu(
+		array(
 			'theme_location' => $cmo_pmenu,
 			'container_id'	=>	'mobile-menu-wrapper',
-			'container_class' => 'mobile-menu', 
+			'container_class' => 'mobile-menu',
 			'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 			'walker' => new Cumulo_Nav_Walker()
 		)
@@ -77,6 +77,9 @@ $cmo_wide_boxed = cmo_get_page_theme_option( 'content_layout', 'content-layout' 
 	remove_filter( 'wp_nav_menu_items', 'cmo_add_search_box_to_mobile_nav');
 	?>
 	</div>
-<?php } 
+	<div>
+		<?php if ( is_page( 'home' )) echo do_shortcode('[layerslider id="1"]'); ?>
+	</div>
+<?php }
 get_template_part ( "templates/header/{$cmo_header_style}" );
 } ?>
