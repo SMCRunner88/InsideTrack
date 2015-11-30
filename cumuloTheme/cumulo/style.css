@@ -56,8 +56,12 @@ Text Domain: cumulo
 	display: inline-block !important;
 }
 
-.wp-caption-text, 
-.sticky, 
-.gallery-caption, 
+.wp-caption-text,
+.sticky,
+.gallery-caption,
 .bypostauthor {
+}
+
+.post-slides {
+	height: 100vmax;
 }
